@@ -5,6 +5,7 @@
 #include <iomanip>
 #include "ieee754.h"
 #include <string>
+#include "ConsoleApplication1.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ int main()
     bool numberFormatValid;
     string numberFormatString;
     string numberFromUser;
-    unsigned int *ieee;
+    unsigned int* ieee;
     string binStr;
     string hexStr;
     string signFromUser;
@@ -44,6 +45,103 @@ int main()
         cout << "Your choice: ";
         cin >> activity;
         activityValid = activity == 't' || activity == 'c';
+    }
+    if (activity == 'c') {
+        char oper;
+
+        float a, b;
+
+        // It allow user to enter the operands 
+
+        cout << "Enter two operands: ";
+
+        cin >> a >> b;
+
+        // It allows user to enter operator i.e. +, -, *, / 
+
+        cout << "Enter operator: ";
+
+        cin >> oper;
+
+        // Switch statement begins 
+
+        switch (oper)
+
+        {
+
+            // If operator is '+'  
+
+        case '+':
+
+            cout << a + b;
+
+            break;
+
+            // If operator is '-'  
+
+        case '-':
+
+            cout << a - b;
+
+            break;
+
+            // If operator is '*' 
+
+        case '*':
+
+            cout << a * b;
+
+            break;
+
+            // If operator is '/' 
+
+        case '/':
+
+            cout << a / b;
+
+            break;
+
+            // If any other operator display error message 
+
+        default:
+
+            cout << "Error! Incorrect operator";
+
+            break;
+
+        }
+        if (oper == '+') {
+            a += b;
+            var.f = a;
+            binStr = to_string(var.raw.sign) + returnBinary(var.raw.exponent, 8) + returnBinary(var.raw.mantissa, 23);
+        }
+        if (oper == '-') {
+            a -= b;
+            var.f = a;
+            binStr = to_string(var.raw.sign) + returnBinary(var.raw.exponent, 8) + returnBinary(var.raw.mantissa, 23);
+        }
+        if (oper == '/') {
+            a /= b;
+            var.f = a;
+            binStr = to_string(var.raw.sign) + returnBinary(var.raw.exponent, 8) + returnBinary(var.raw.mantissa, 23);
+        }
+        if (oper == '*') {
+            a *= b;
+            var.f = a;
+            binStr = to_string(var.raw.sign) + returnBinary(var.raw.exponent, 8) + returnBinary(var.raw.mantissa, 23);
+        }
+
+
+        cout << "\nIEEE 754 representation: ";
+        printIEEE(var);
+        cout << "Decimal representation: ";
+        cout << fixed << setprecision(6) << var.f << endl;
+        cout << "Hexadecimal representation: ";
+        cout << convertBinStrToHexStr(binStr);
+
+
+        return 0;
+
     }
     if (activity == 't') {
         cout << "\nFORMAT TRANSFORMER";
@@ -154,3 +252,4 @@ int main()
 
     }
 }
+
