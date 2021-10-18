@@ -44,7 +44,7 @@ void printBinary(int n, int i)
     }
 }
 
-string returnBinary(int n, int i)
+string returnBinaryStr(int n, int i)
 {
 
 	// Returns the binary representation
@@ -64,15 +64,15 @@ string returnBinary(int n, int i)
 
 // This function converts a real value
 // to its IEEE floating point representation.
-void printIEEE(myfloat var)
+void printIEEEBinary(myfloat var)
 {
 
     // Prints the IEEE 754 representation
     // of a float value (32 bits)
 
-    cout << var.raw.sign << " | ";
+    cout << "sign = " << var.raw.sign << " exponent = ";
     printBinary(var.raw.exponent, 8);
-    cout << " | ";
+    cout << " mantissa =  ";
     printBinary(var.raw.mantissa, 23);
     cout << "\n";
 }
@@ -98,12 +98,12 @@ unsigned int* convertStrToIntArr(string str)
     return arr;
 }
 
-string convertBinStrToHexStr(string bin)
+string convertBinStrToHexStr(string bin, string prefix)
 {
-	string rest("0x"), tmp, chr = "0000";
+	string rest(prefix), tmp, chr = "0000";
 	int len = bin.length() / 4;
 	chr = chr.substr(0, len);
-	bin = chr + bin;
+	//bin = chr + bin;
 	for (int i = 0; i < bin.length(); i += 4)
 	{
 		tmp = bin.substr(i, 4);
@@ -259,4 +259,25 @@ string convertHexStrToBinStr(string hex)
 		}
 	}
 	return rest;
+}
+
+// This function converts a real value
+// to its IEEE floating point representation.
+void printIEEEHex(myfloat var)
+{
+
+	// Prints the IEEE 754 representation
+	// of a float value (32 bits)
+
+	string exp = returnBinaryStr(var.raw.exponent, 8);
+	string expHex = convertBinStrToHexStr(exp, "");
+	string mant = returnBinaryStr(var.raw.mantissa, 23);
+	string mantHex = convertBinStrToHexStr("0" + mant, "");
+
+
+	cout << "sign = " << var.raw.sign << " exponent = ";
+	cout << expHex;
+	cout << " mantissa =  ";
+	cout << mantHex;
+	cout << "\n";
 }
