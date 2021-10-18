@@ -113,31 +113,31 @@ int main()
         if (oper == '+') {
             a += b;
             var.f = a;
-            binStr = to_string(var.raw.sign) + returnBinary(var.raw.exponent, 8) + returnBinary(var.raw.mantissa, 23);
+            binStr = to_string(var.raw.sign) + returnBinaryStr(var.raw.exponent, 8) + returnBinaryStr(var.raw.mantissa, 23);
         }
         if (oper == '-') {
             a -= b;
             var.f = a;
-            binStr = to_string(var.raw.sign) + returnBinary(var.raw.exponent, 8) + returnBinary(var.raw.mantissa, 23);
+            binStr = to_string(var.raw.sign) + returnBinaryStr(var.raw.exponent, 8) + returnBinaryStr(var.raw.mantissa, 23);
         }
         if (oper == '/') {
             a /= b;
             var.f = a;
-            binStr = to_string(var.raw.sign) + returnBinary(var.raw.exponent, 8) + returnBinary(var.raw.mantissa, 23);
+            binStr = to_string(var.raw.sign) + returnBinaryStr(var.raw.exponent, 8) + returnBinaryStr(var.raw.mantissa, 23);
         }
         if (oper == '*') {
             a *= b;
             var.f = a;
-            binStr = to_string(var.raw.sign) + returnBinary(var.raw.exponent, 8) + returnBinary(var.raw.mantissa, 23);
+            binStr = to_string(var.raw.sign) + returnBinaryStr(var.raw.exponent, 8) + returnBinaryStr(var.raw.mantissa, 23);
         }
 
 
         cout << "\nIEEE 754 representation: ";
-        printIEEE(var);
+        printIEEEBinary(var);
         cout << "Decimal representation: ";
         cout << fixed << setprecision(6) << var.f << endl;
         cout << "Hexadecimal representation: ";
-        cout << convertBinStrToHexStr(binStr);
+        cout << convertBinStrToHexStr(binStr, "0x");
 
 
         return 0;
