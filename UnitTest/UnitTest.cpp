@@ -16,11 +16,11 @@ namespace UnitTest
 			std::string expectedOutput = "0";
 			//Assert::AreEqual(expectedOutput, returnBinary(-1, 7)); //Issue with this scenario
 			expectedOutput = "0";
-			Assert::AreEqual(expectedOutput, returnBinary(-2, 1));
+			Assert::AreEqual(expectedOutput, returnBinaryStr(-2, 1));
 			expectedOutput = "0100000000000000000000100100101001";
-			Assert::AreEqual(expectedOutput, returnBinary(2345, 34));
+			Assert::AreEqual(expectedOutput, returnBinaryStr(2345, 34));
 			expectedOutput = "000000000000000000010111";
-			Assert::AreEqual(expectedOutput, returnBinary(23, 24));
+			Assert::AreEqual(expectedOutput, returnBinaryStr(23, 24));
 		}
 
 		TEST_METHOD(ConvertHexStrToBinStr_Method)
@@ -41,9 +41,14 @@ namespace UnitTest
 
 		TEST_METHOD(ConvertStrToIntArr_Method)
 		{
-			unsigned int* ieee;
-			std::string input = "00010010";
-			Assert::AreEqual(convertStrToIntArr(input), ieee); //#Issue2: Error is not handled.
+			unsigned int expectedArr[32] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0 };
+			std::string input = "00000000000000000000000000010010";
+			unsigned int* actualArr = convertStrToIntArr(input);
+			for (int i = 0; i < 32; i++)
+			{
+				Assert::AreEqual(expectedArr[i], actualArr[i]); //#Issue2: Error is not handled.
+			}
+			
 		}
 
 		TEST_METHOD(ConvertToInt_Method)
@@ -56,13 +61,13 @@ namespace UnitTest
 		TEST_METHOD(ConvertBinStrToHexStr_Method)
 		{
 			std::string expectedOutput = "0x4A";
-			Assert::AreEqual(expectedOutput, convertBinStrToHexStr("1001010"));
+			Assert::AreEqual(expectedOutput, convertBinStrToHexStr("01001010", "0x"));
 			expectedOutput = "0x";
-			Assert::AreEqual(expectedOutput, convertBinStrToHexStr("0"));
+			Assert::AreEqual(expectedOutput, convertBinStrToHexStr("0", "0x"));
 			expectedOutput = "0x";
-			Assert::AreEqual(expectedOutput, convertBinStrToHexStr("-1"));
+			Assert::AreEqual(expectedOutput, convertBinStrToHexStr("-1", "0x"));
 			expectedOutput = "0x";
-			Assert::AreEqual(expectedOutput, convertBinStrToHexStr("test")); //#Issue3: Should we throw an error message for invalid inputs
+			Assert::AreEqual(expectedOutput, convertBinStrToHexStr("test", "0x")); //#Issue3: Should we throw an error message for invalid inputs
 		}
 	};
 }
