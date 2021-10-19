@@ -51,11 +51,19 @@ int main()
 
         float a, b;
 
+        myfloat varA{};
+
+        myfloat varB{};
+
         // It allow user to enter the operands 
 
         cout << "Enter two operands: ";
 
         cin >> a >> b;
+
+        varA.f = a;
+
+        varB.f = b;
 
         // It allows user to enter operator i.e. +, -, *, / 
 
@@ -131,13 +139,49 @@ int main()
             binStr = to_string(var.raw.sign) + returnBinaryStr(var.raw.exponent, 8) + returnBinaryStr(var.raw.mantissa, 23);
         }
 
+        cout << "\n\nFIRST OPERAND";
+        cout << "\n----------------------";
+        cout << "\nIEEE 754 representation: ";
+        string binStrA;
+        binStrA = to_string(varA.raw.sign) + returnBinaryStr(varA.raw.exponent, 8) + returnBinaryStr(varA.raw.mantissa, 23);
+        printIEEEBinary(varA);
+        cout << "IEEE 754 hexadecimal representation: ";
+        printIEEEHex(varA);
+        cout << "Decimal representation: ";
+        cout << fixed << setprecision(6) << varA.f << endl;
+        cout << "Hexadecimal representation: ";
+        cout << convertBinStrToHexStr(binStrA, "0x") << endl;
+        cout << "Classification: ";
+        cout << classification(varA);
 
+        cout << "\nSECOND OPERAND";
+        cout << "\n----------------------";
+        cout << "\nIEEE 754 representation: ";
+        string binStrB;
+        binStrB = to_string(varB.raw.sign) + returnBinaryStr(varB.raw.exponent, 8) + returnBinaryStr(varB.raw.mantissa, 23);
+        printIEEEBinary(varB);
+        cout << "IEEE 754 hexadecimal representation: ";
+        printIEEEHex(varB);
+        cout << "Decimal representation: ";
+        cout << fixed << setprecision(6) << varB.f << endl;
+        cout << "Hexadecimal representation: ";
+        cout << convertBinStrToHexStr(binStrB, "0x") << endl;
+        cout << "Classification: ";
+        cout << classification(varB);
+
+        cout << "\n----------------------";
+        cout << "\n\nRESULT";
+        cout << "\n----------------------";
         cout << "\nIEEE 754 representation: ";
         printIEEEBinary(var);
+        cout << "IEEE 754 hexadecimal representation: ";
+        printIEEEHex(var);
         cout << "Decimal representation: ";
         cout << fixed << setprecision(6) << var.f << endl;
         cout << "Hexadecimal representation: ";
-        cout << convertBinStrToHexStr(binStr, "0x");
+        cout << convertBinStrToHexStr(binStr, "0x") << endl;
+        cout << "Classification: ";
+        cout << classification(var);
 
 
         return 0;
