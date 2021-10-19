@@ -281,3 +281,11 @@ void printIEEEHex(myfloat var)
 	cout << mantHex;
 	cout << "\n";
 }
+
+string classification(myfloat var)
+{
+	if (var.raw.exponent == 255 && var.raw.mantissa != 0) return "Not a Number (NaN)";
+	else if (var.raw.exponent == 0 && var.raw.mantissa != 0) return "Denormalized Floating Point Number";
+	else if (var.raw.exponent == 0 && var.raw.mantissa == 0) return "Zero";
+	else if (0 < var.raw.exponent && var.raw.exponent < 255) return "Normalized Floating Point Number";
+}

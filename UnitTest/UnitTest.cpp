@@ -69,5 +69,28 @@ namespace UnitTest
 			expectedOutput = "0x";
 			Assert::AreEqual(expectedOutput, convertBinStrToHexStr("test", "0x")); //#Issue3: Should we throw an error message for invalid inputs
 		}
+
+		TEST_METHOD(classification_Method)
+		{
+			myfloat var{};
+			var.f = 0;
+			std::string expectedoutput = "Zero";
+			Assert::AreEqual(expectedoutput, classification(var));
+			var.raw.sign = 0;
+			var.raw.exponent = 255;
+			var.raw.mantissa = 1;
+			expectedoutput = "Not a Number (NaN)";
+			Assert::AreEqual(expectedoutput, classification(var));
+			var.raw.sign = 0;
+			var.raw.exponent = 0;
+			var.raw.mantissa = 1;
+			expectedoutput = "Denormalized Floating Point Number";
+			Assert::AreEqual(expectedoutput, classification(var));
+			var.raw.sign = 0;
+			var.raw.exponent = 23;
+			var.raw.mantissa = 12;
+			expectedoutput = "Normalized Floating Point Number";
+			Assert::AreEqual(expectedoutput, classification(var));
+		}
 	};
 }

@@ -244,7 +244,9 @@ int main()
         cout << "Decimal representation: ";
         cout << fixed << setprecision(6) << var.f << endl;
         cout << "Hexadecimal representation: ";
-        cout << convertBinStrToHexStr(binStr, "0x");
+        cout << convertBinStrToHexStr(binStr, "0x") << endl;
+        cout << "Classification: ";
+        cout << classification(var);
 
         return 0;
     }
